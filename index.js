@@ -41,29 +41,26 @@ database
 var http = require('http');
 var express = require('express');
 var bodyParser = require('body-parser');
-var cors = require('cors');
 var app = express();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var list = [];
 const database = require('./app/config/dbconfig');
 var server = http.createServer(app);
-app.use(cors());
 var messagesServeur = [];
 var messagesClient = [];
-
+var cors = require('cors');
+app.use(cors());
 
 var io = require('socket.io').listen(server);
 
 io.sockets.on('connection', function (socket) {
     console.log('user connecté');
-    socket.on('envoieMessage',data=>{
-        fetch("http://localhost:3000/api/beer?name="+data)
-        .then(response => response.json())
-        .then(data => {
-            socket.emit('envoieCountry',data[0].country);
-        })
-        socket.emit('recuMessage',data);
-        console.log(data);
+    socket.emit('init',[messagesClient,messagesServeur]);
+    socket.on('envoieDescription',data=>{ // data = [nomBiere, nomPays]
+        messagesClient.push(data[0]);
+        messagesServeur.push(data[1]);
+        socket.broadcast.emit('broad', data);
+        console.log(data);  
     })
 });
 
@@ -81,8 +78,7 @@ database
         app.use(REST_API_ROOT, require('./app/routes/router'));
 
         //accès aux pages statiques
-        app.use('/static', express.static('static'));
-
+        app.use('/static', express.static(__dirname + '/client'));
     });
 
 

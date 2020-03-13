@@ -1,3 +1,4 @@
+
 .my-custom-scrollbar {
     position: relative;
     height: 50vh;
@@ -10,7 +11,7 @@
 *{
 	padding: 0px;
 	margin: 0px;
-	font-family: 'Fira Code';
+	font-family: 'Lato';
 }
 body{
 	height: 100%;
@@ -31,6 +32,7 @@ body{
 	border-radius: 5px 5px 0px 0px;
 }
 .chat-head h2{
+	margin-left:30px;
 	color: white;
 	display: inline-block;
 }
@@ -73,7 +75,7 @@ body{
 .msg-send, .msg-receive{
 	width: 200px;
 	height: 35px;
-	padding: 5px 5px 5px 10px;
+	padding: 0px 10px;
 	margin: 10px auto;
 	border-radius: 3px;
 	line-height: 35px;
