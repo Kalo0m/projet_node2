@@ -11,8 +11,17 @@ class BeerController {
         this.common = new ControllerCommon();
     }
 
+    findByAll(req, res){
+        let name = req.params.name;
+        let categorie = req.params.categorie;
+        let country = req.params.country;
+        this.beerDAO.findByAll(name,categorie,country)
+            .then(this.common.findSuccess(res))
+            .catch(this.common.findError(res));
+    }
 
     findAll(res) {
+        console.log(res);
         this.beerDAO.findAll()
             .then(this.common.findSuccess(res))
             .catch(this.common.findError(res));

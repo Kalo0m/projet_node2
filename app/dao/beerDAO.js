@@ -8,6 +8,17 @@ class BeerDAO {
         this.common = new daoCommon();
     }
 
+    findByAll(name,categorie,country){
+        const sqlRequest = "FROM beer WHERE beer.name LIKE '%"+name+"%' AND beer.category LIKE '%"+categorie+"%' AND beer.country LIKE '%"+coutry+"%'";
+        let sqlParams ={$name : name, $categorie : categorie, $country : country};
+        return this.common.findAll(sqlRequest)
+            .then(rows => {
+                const beers = rows.map(row => new Beer(row));
+                return beers;
+            })
+            .catch(err => console.log(err));
+    }
+
     findAll() {
         const sqlRequest = "SELECT * FROM beer LIMIT 20";
 
@@ -20,7 +31,7 @@ class BeerDAO {
     };
     findByName(name){
         //const sqlRequest = "SELECT * FROM beer WHERE beer.name=$name";
-        const sqlRequest = "SELECT * FROM beer WHERE beer.name='"+name+"'";
+        const sqlRequest = "SELECT * FROM beer WHERE beer.name CONTAINS '"+name+"'";
         let sqlParams = {$name: name};
         return this.common.findAll(sqlRequest)
         .then(rows => {

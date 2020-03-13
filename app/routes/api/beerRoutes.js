@@ -8,11 +8,17 @@ const beerController = new BeerController();
 router.get('/', function (req, res) {
     console.log('route : a/')
     if(req.query.name==null){
-        beerController.findAll(res);
+        console.log("findAll");
+        beerController.findAll( res);
+    }else if(req.query.country!=null){
+        console.log("findByAll");
+        beerController.findByAll(req, res);
     }else{
+        console.log("findName");
         beerController.findByName(req,res);
     }
 });
+
 router.get('/plusHautTaux', function (req, res) {
     console.log('route : /plusHautTaux');
     beerController.getPlusHautTaux(res);
@@ -23,7 +29,6 @@ router.get('/:id', function (req, res) {
     beerController.findById(req, res);
     
 });
-
 
 router.get('/:deg', function (req, res) {
     console.log(req.params);
