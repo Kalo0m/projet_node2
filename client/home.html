@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <title>Hello, world!</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active mr-5">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Nom de la bière</span>
+            </div>
+            <input type="text" aria-label="First name" class="form-control">
+          </div>
+        </li>
+        <li class="nav-item">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">taux d'alcool</span>
+            </div>
+            <input type="text" aria-label="First name" class="form-control">
+          </div>
+        </li>
+
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+  <div class="table-wrapper-scroll-y my-custom-scrollbar m-5 ">
+
+    <table class="shadow-lg table table-striped table-dark h-25 p-2">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Name</th>
+          <th scope="col">alcool</th>
+          <th scope="col">Categorie</th>
+          <th scope="col">Ville</th>
+        </tr>
+      </thead>
+      <tbody id='tabBiere'>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="wrapper">
+    <div class="chat-box">
+      <div class="chat-head">
+        <h2>Chat Box</h2>
+        <img src="https://maxcdn.icons8.com/windows10/PNG/16/Arrows/angle_down-16.png" title="Expand Arrow" width="16">
+      </div>
+      <div class="chat-body">
+        <div class="msg-insert">
+          
+        </div>
+        <div class="chat-text">
+          <textarea placeholder="Send"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
+  <script src="js/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+  <script src="js/socket.js"></script>
+  <script src="js/chat.js"></script>
+
+</body>
+
+</html>

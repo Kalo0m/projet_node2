@@ -1,0 +1,25 @@
+{
+  "name": "exercices",
+  "version": "1.0.0",
+  "description": "Beer application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "todo"
+  },
+  "author": "BJF",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "csv-parse": "^4.8.5",
+    "express": "^4.17.1",
+    "jquery": "^3.4.1",
+    "nodemon": "^2.0.2",
+    "socket.io": "^2.3.0",
+    "sqlite3": "^4.1.1"
+  }
+}
