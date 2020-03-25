@@ -13,20 +13,31 @@
 	margin: 0px;
 	font-family: 'Lato';
 }
+.text-information{
+	font-size : 1.5em;
+}
 body{
 	height: 100%;
 	background: #95a5a6;
 }
-.chat-box{
+.titre2{
+	font-size:1.3em;
+}
+.chat-box-container{
 	position: absolute;
+	display:flex;
+	flex-direction: row-reverse;
 	right: 20px;
 	bottom: 0px;
-	background: white;
-	width: 300px;
-	border-radius: 5px 5px 0px 0px;
+	
+}
+.chat-box{
+	margin : 0 20px;
+	width: 20vw;
+	position: relative;
 }
 .chat-head{
-	width: inherit;
+	width: 100%;
 	height: 45px;
 	background: #2c3e50;
 	border-radius: 5px 5px 0px 0px;
@@ -42,18 +53,26 @@ body{
 	width: 25px;
 	margin: 10px;
 }
+#navbarSupportedContent ul li {
+	width:20vw;
+}
+.disabled{
+	
+	pointer-events: none;
+	cursor: default;
+	
+	
+}
 .chat-body{
     height: 40vh;
     background-color: #e7e7e7;
-	width: inherit;
+	width: 100%;
 	overflow: auto;
-	margin-bottom: 45px;
 }
 .chat-text{
-	position: fixed;
 	bottom: 0px;
 	height: 45px;
-	width: inherit;
+	width: 100%;
 }
 .chat-text textarea{
 	width: inherit;
@@ -66,6 +85,9 @@ body{
 .chat-text textarea:active, .chat-text textarea:focus, .chat-text textarea:hover{
 	border-color: royalblue;
 }
+.message{
+	text-align: right;
+}
 .msg-send{
 	background: #2ecc71;
 }
@@ -73,8 +95,8 @@ body{
 	background: #3498db;
 }
 .msg-send, .msg-receive{
-	width: 200px;
-	height: 35px;
+	width:70%;
+	height: auto;
 	padding: 0px 10px;
 	margin: 10px auto;
 	border-radius: 3px;

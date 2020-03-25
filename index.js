@@ -42,33 +42,51 @@ var http = require('http');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
-var list = [];
+
 const database = require('./app/config/dbconfig');
 var server = http.createServer(app);
-var messagesServeur = [];
-var messagesClient = [];
+var messages = [];
 var cors = require('cors');
 app.use(cors());
-
+var port = 3000;
 var io = require('socket.io').listen(server);
-
+var messageRooms = [];
 io.sockets.on('connection', function (socket) {
     console.log('user connecté');
-    socket.emit('init',[messagesClient,messagesServeur]);
+    socket.emit('init',messages);
     socket.on('envoieDescription',data=>{ // data = [nomBiere, nomPays]
-        messagesClient.push(data[0]);
-        messagesServeur.push(data[1]);
+        messages.push(data)
         socket.broadcast.emit('broad', data);
         console.log(data);  
+    });
+    socket.on('createRoom',room=>{
+        if(messageRooms[room] == null){
+            messageRooms[room] = []
+            
+        }else{
+            socket.emit('initialisation',messageRooms[room]);
+        }
+        console.log(messageRooms)
+        socket.join(room);
+        console.log(room+' a été rejoint');
+
+    });
+    socket.on('sendMessage',function(data){
+        console.log('message recu d\'un tchat');
+        messageRooms[data[0]].push(data[1])
+        console.log(messageRooms)
+        socket.broadcast.to(data[0]).emit('messageBroad',data);
     })
+
 });
 
 database
     .init
     .then((db) => {
         console.log('aaa');
-        server.listen(3000);
+        server.listen(port, function () {
+            console.log("Server listening on port : " + port);
+        });
 
         app.use(bodyParser.urlencoded({ extended: false }));
         app.use(bodyParser.json());

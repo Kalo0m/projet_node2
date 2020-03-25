@@ -12,17 +12,21 @@ class BeerController {
     }
 
     findByAll(req, res){
-        let name = req.params.name;
-        let categorie = req.params.categorie;
-        let country = req.params.country;
-        this.beerDAO.findByAll(name,categorie,country)
+        let name = req.query.name;
+        let categorie = req.query.categorie;
+        let country = req.query.country;
+        let page = req.query.page || 1;
+        let count = req.query.count || 20;
+        this.beerDAO.findByAll(name,categorie,country,page,count)
             .then(this.common.findSuccess(res))
             .catch(this.common.findError(res));
     }
 
-    findAll(res) {
-        console.log(res);
-        this.beerDAO.findAll()
+    findAll(req,res) {
+        let page = req.query.page || 1;
+        let count = req.query.count || 20
+        console.log(count + "    " +page );
+        this.beerDAO.findAll(count,page)
             .then(this.common.findSuccess(res))
             .catch(this.common.findError(res));
     }
@@ -35,7 +39,7 @@ class BeerController {
     };
     findByName(req,res){ // /api/beer?name={name}
         let name = req.query.name;
-        console.log("nom recherché : "+name);
+        console.log("nom recherché : "+req.query);
         this.beerDAO.findByName(name)
             .then(this.common.findSuccess(res))
             .catch(this.common.findError(res));

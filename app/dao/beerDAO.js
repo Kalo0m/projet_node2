@@ -8,9 +8,9 @@ class BeerDAO {
         this.common = new daoCommon();
     }
 
-    findByAll(name,categorie,country){
-        const sqlRequest = "FROM beer WHERE beer.name LIKE '%"+name+"%' AND beer.category LIKE '%"+categorie+"%' AND beer.country LIKE '%"+coutry+"%'";
-        let sqlParams ={$name : name, $categorie : categorie, $country : country};
+    findByAll(name,categorie,country,page,count){
+        const sqlRequest = "SELECT * FROM beer WHERE beer.name LIKE '%"+name+"%' AND beer.category LIKE '%"+categorie+"%' AND beer.country LIKE '%"+country+"%' LIMIT "+count+" OFFSET "+page;
+        console.log('requete : ' + sqlRequest);
         return this.common.findAll(sqlRequest)
             .then(rows => {
                 const beers = rows.map(row => new Beer(row));
@@ -19,8 +19,8 @@ class BeerDAO {
             .catch(err => console.log(err));
     }
 
-    findAll() {
-        const sqlRequest = "SELECT * FROM beer LIMIT 20";
+    findAll(limite,page) {
+        const sqlRequest = "SELECT * FROM beer LIMIT "+limite+" OFFSET "+page;
 
         return this.common.findAll(sqlRequest)
             .then(rows => {
@@ -31,7 +31,7 @@ class BeerDAO {
     };
     findByName(name){
         //const sqlRequest = "SELECT * FROM beer WHERE beer.name=$name";
-        const sqlRequest = "SELECT * FROM beer WHERE beer.name CONTAINS '"+name+"'";
+        const sqlRequest = "SELECT * FROM beer WHERE beer.name LIKE '"+name+"%' LIMIT 10";
         let sqlParams = {$name: name};
         return this.common.findAll(sqlRequest)
         .then(rows => {

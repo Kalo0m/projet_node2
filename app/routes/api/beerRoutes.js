@@ -7,9 +7,10 @@ const beerController = new BeerController();
 
 router.get('/', function (req, res) {
     console.log('route : a/')
-    if(req.query.name==null){
+    if(req.query.name==null && req.query.country==null && req.query.cat==null ){
         console.log("findAll");
-        beerController.findAll( res);
+        //console.log(req);
+        beerController.findAll(req,res);
     }else if(req.query.country!=null){
         console.log("findByAll");
         beerController.findByAll(req, res);
