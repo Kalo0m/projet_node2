@@ -20,7 +20,7 @@ class BeerDAO {
     }
 
     findAll(limite,page) {
-        const sqlRequest = "SELECT * FROM beer LIMIT "+limite+" OFFSET "+page;
+        const sqlRequest = "SELECT * FROM beer LIMIT "+limite+" OFFSET "+((page-1)*limite);
 
         return this.common.findAll(sqlRequest)
             .then(rows => {
