@@ -12,10 +12,10 @@ class BeerController {
     }
 
     findByAll(req, res){
-        let name = req.query.name;
-        let categorie = req.query.categorie;
-        let country = req.query.country;
-        let page = req.query.page || 1;
+        let name = req.query.name || '';
+        let categorie = req.query.categorie || '';
+        let country = req.query.country|| '';
+        let page = req.query.page || 0;
         let count = req.query.count || 20;
         this.beerDAO.findByAll(name,categorie,country,page,count)
             .then(this.common.findSuccess(res))
@@ -23,7 +23,7 @@ class BeerController {
     }
 
     findAll(req,res) {
-        let page = req.query.page || 1;
+        let page = req.query.page || 0;
         let count = req.query.count || 20
         console.log(count + "    " +page );
         this.beerDAO.findAll(count,page)

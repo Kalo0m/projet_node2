@@ -20,7 +20,7 @@ class BeerDAO {
     }
 
     findAll(limite,page) {
-        const sqlRequest = "SELECT * FROM beer LIMIT "+limite+" OFFSET "+((page-1)*limite);
+        const sqlRequest = "SELECT * FROM beer LIMIT "+limite+" OFFSET "+((page)*limite);
 
         return this.common.findAll(sqlRequest)
             .then(rows => {
@@ -31,8 +31,8 @@ class BeerDAO {
     };
     findByName(name){
         //const sqlRequest = "SELECT * FROM beer WHERE beer.name=$name";
-        const sqlRequest = "SELECT * FROM beer WHERE beer.name LIKE '"+name+"%' LIMIT 10";
-        let sqlParams = {$name: name};
+        const sqlRequest = "SELECT * FROM beer WHERE beer.name LIKE '%"+name+"%' LIMIT 10";
+        console.log('requete : '+sqlRequest)
         return this.common.findAll(sqlRequest)
         .then(rows => {
             const beers = rows.map(row => new Beer(row));
@@ -43,8 +43,7 @@ class BeerDAO {
     }
     findTaux(){
         const sqlRequest = "SELECT * FROM beer WHERE beer.alcohol_by_volume=(SELECT MAX(alcohol_by_volume) FROM beer)";
-        let sqlParams = {$param: "alcohol_by_volume"};
-        return this.common.findOne(sqlRequest, sqlParams)
+        return this.common.findOne(sqlRequest)
             .then(row => new Beer(row))
 
     }
@@ -88,15 +87,24 @@ class BeerDAO {
     };
 
     update(beer) {
+        console.log(beer);
         let sqlRequest = "UPDATE beer SET " +
-            "cat_name=$catName, " +
-            "last_mod=$lastMod " +
+            "name=$name, " +
+            "last_mod=$lastMod, " +
+            "alcohol_by_volume=$alcool, " +
+            "description=$desc, " +
+            "country=$pays, " +
+            "address=$addr " +
             "WHERE id=$id";
 
         let sqlParams = {
-            $catName: categorie.catName,
-            $lastMod: categorie.lastMod,
-            $id: categorie.id
+            $name: beer.Name,
+            $lastMod: beer.last_mod,
+            $alcool: beer.alcohol_by_volume,
+            $desc: beer.description,
+            $pays: beer.country,
+            $addr: beer.address,
+            $id: beer.id
         };
         return this.common.run(sqlRequest, sqlParams);
     };

@@ -92,6 +92,7 @@ class Common {
     run(sqlRequest, sqlParams) {
         return new Promise(function (resolve, reject) {
             let stmt = database.db.prepare(sqlRequest);
+            console.log(stmt);
             stmt.run(sqlParams, function (err) {
                 if (this.changes === 1) {
                     resolve(true);

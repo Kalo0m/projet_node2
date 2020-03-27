@@ -54,27 +54,22 @@ var messageRooms = [];
 io.sockets.on('connection', function (socket) {
     console.log('user connecté');
     socket.emit('init',messages);
-    socket.on('envoieDescription',data=>{ // data = [nomBiere, nomPays]
+    socket.on('envoieDescription',data=>{ // data = [nomBiere, description]
         messages.push(data)
         socket.broadcast.emit('broad', data);
-        console.log(data);  
     });
     socket.on('createRoom',room=>{
         if(messageRooms[room] == null){
             messageRooms[room] = []
-            
         }else{
             socket.emit('initialisation',messageRooms[room]);
         }
-        console.log(messageRooms)
         socket.join(room);
         console.log(room+' a été rejoint');
 
     });
-    socket.on('sendMessage',function(data){
-        console.log('message recu d\'un tchat');
+    socket.on('sendMessage',function(data){ // data = [room , message]
         messageRooms[data[0]].push(data[1])
-        console.log(messageRooms)
         socket.broadcast.to(data[0]).emit('messageBroad',data);
     })
 
